@@ -95,7 +95,9 @@ function! s:shellesc_cmd(arg)
     let e .= c
   endfor
   let e .= repeat('\', slashes) .'"'
-  return substitute(substitute(e, '[&|<>()^!"]', '^&', 'g'), '%', '%%', 'g')
+  " return substitute(substitute(e, '[&|<>()^!"]', '^&', 'g'), '%', '%%', 'g')
+  " that doesn't work on windows with msys
+  return substitute(e, '\', '/', 'g')
 endfunction
 
 function! fzf#shellescape(arg, ...)
